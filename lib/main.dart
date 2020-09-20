@@ -18,26 +18,41 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   var data = fetchData();
 
+  int _getAverageNumSteps() {
+    int numSteps = 0;
+    for (var entry in data) {
+      numSteps += entry.numSteps;
+    }
+    return numSteps ~/ 7;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
+          backgroundColor: Color(0xFFF2EEE7),
           appBar: AppBar(
+            title: Text('Charts', style: TextStyle(color: Color(0xFFEFC501))),
+            backgroundColor: Color(0xFF003366),
             bottom: TabBar(
+              indicatorColor: Color(0xFFEFC501),
+              labelColor: Color(0xFFEFC501),
               tabs: [
                 Tab(icon: Icon(FontAwesomeIcons.solidChartBar)),
                 Tab(icon: Icon(FontAwesomeIcons.chartLine)),
               ],
             ),
-            title: Text('Charts'),
           ),
-          body: TabBarView(
-            children: [
-              BarChart(data),
-              LineChart(data),
-            ],
+          body: Padding(
+            padding: EdgeInsets.all(10),
+            child: TabBarView(
+              children: [
+                BarChart(data, _getAverageNumSteps()),
+                LineChart(data, _getAverageNumSteps()),
+              ],
+            ),
           ),
         ),
       ),
