@@ -62,7 +62,7 @@ class BarChart extends StatelessWidget {
                     style: TextStyle(fontSize: 25),
                   ),
                   Text(
-                    'steps in the past week.',
+                    'steps/day in the past week.',
                     style: TextStyle(color: Colors.black.withOpacity(0.6)),
                   ),
                 ],
